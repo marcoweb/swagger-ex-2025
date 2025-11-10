@@ -19,33 +19,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/afericoes")
-@Tag(name = "Aferições",
-    description = "Gerencia os registros de aferições de sensores")
 public class AfericaoController {
     @Autowired
     private AfericaoService afericaoService;
 
     @PostMapping
-    @Operation(summary = "Insere uma nova aferição",
-        description = "Cria um novo registro na base de dados de aferição com os dados enviados.")
-    @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Aferição criada com sucesso."),
-        @ApiResponse(responseCode = "400", description = "Dados inválidos")
-    })
     public AfericaoDTO insert(@RequestBody AfericaoInsertDTO novaAfericao) {
         return afericaoService.insert(novaAfericao);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Obtem dados de uma aferição específica",
-        description = "Retorna os dados da aferição identificada pelo ID informado.")
-    @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Aferição Encontrada"),
-        @ApiResponse(responseCode = "404", description = "Aferição Não Encontrada")
-    })
-    public AfericaoDTO getOne(
-        @Parameter(description = "ID da aferição a ser consultada")
-        @PathVariable long id) {
+    public AfericaoDTO getOne(@PathVariable long id) {
         return afericaoService.getOne(id);
     }
 
